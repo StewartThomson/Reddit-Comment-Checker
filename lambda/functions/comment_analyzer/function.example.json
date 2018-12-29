@@ -1,0 +1,9 @@
+{
+  "name": "comment_analyzer",
+  "description": "checks reddit comments",
+  "runtime": "go1.x",
+  "memory": 1152,
+  "timeout": 5,
+  "role": "your:aws:arn",
+  "handler": "main"
+}
