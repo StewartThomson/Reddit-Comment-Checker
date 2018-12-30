@@ -15,5 +15,10 @@
         "style.css"
       ]
     }
-  ]
+  ],
+  "icons": {
+    "16": "CheckerLogo16.png",
+    "48": "CheckerLogo48.png",
+    "128": "CheckerLogo128.png"
+  }
 }
