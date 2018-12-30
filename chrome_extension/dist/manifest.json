@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Reddit comment checker",
-  "version": "0.1",
+  "version": "0.2",
   "content_scripts": [
     {
       "matches": [
@@ -17,8 +17,8 @@
     }
   ],
   "icons": {
-    "16": "CheckerLogo16.png",
-    "48": "CheckerLogo48.png",
-    "128": "CheckerLogo128.png"
+    "16": "icons/CheckerLogo16.png",
+    "48": "icons/CheckerLogo48.png",
+    "128": "icons/CheckerLogo128.png"
   }
 }
