@@ -74,7 +74,7 @@ func HandleRequest(req events.APIGatewayProxyRequest) (events.APIGatewayProxyRes
 		StatusCode: http.StatusOK,
 		Body:       string(js),
 		Headers: map[string]string{
-			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Origin": "chrome-extension://bgchgbcghfnkmhnemjacpcnomnfkpanm",
 		},
 	}, nil
 }
