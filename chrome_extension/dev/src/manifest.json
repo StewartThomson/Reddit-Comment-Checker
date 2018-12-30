@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Reddit comment checker",
-  "version": "0.4",
+  "version": "0.41",
   "content_scripts": [
     {
       "matches": [

@@ -23,7 +23,7 @@ editorParent.appendChild(createElementFromHTML(`
 </div>
 `));
 
-let spinner = document.querySelector("#checker .spinner");
+let spinner = document.querySelector(".checker .spinner");
 let resultContainer = document.querySelector("#resultContainer");
 
 document.getElementById("checkBtn").addEventListener("click", function (event) {
