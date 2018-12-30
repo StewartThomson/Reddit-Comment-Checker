@@ -1,30 +1,37 @@
 const fs = require('fs-extra');
 const concat = require('concat');
 const glob = require("glob");
-const path = require("path");
+const child_process = require("child_process");
 
 (async function build() {
-    const files = glob.sync("./src/*.js");
+    fs.ensureDirSync('../dist/icons');
+    const SRC_FOLDER = "./src/";
+    const DIST_FOLDER = "../dist/";
+    const ZIP_NAME = "reddit_comment_checker.zip";
+    const FILES_TO_COPY = [
+        "style.css",
+        "manifest.json",
+        "icons/*.png"
+    ];
 
-    await fs.ensureDir('../dist');
-    await concat(files, '../dist/reddit-comment-checker.js');
-    await fs.copyFile(
-        './src/manifest.json',
-        '../dist/manifest.json'
-    );
-    await fs.copyFile(
-        './src/style.css',
-        '../dist/style.css'
-    );
-    const icons = glob.sync("./src/icons/*.png");
-    if (!fs.existsSync('../dist/icons')){
-        fs.mkdirSync('../dist/icons');
+    let files = glob.sync(SRC_FOLDER + "*.js");
+
+    await concat(files, DIST_FOLDER + 'reddit-comment-checker.js');
+
+    for(let globToGet of FILES_TO_COPY) {
+        files = glob.sync(SRC_FOLDER + globToGet);
+        for(let file of files) {
+            let filename = file.slice(file.indexOf(SRC_FOLDER) + SRC_FOLDER.length);
+            await fs.copyFile(
+                file,
+                DIST_FOLDER + filename
+            )
+        }
     }
-    for(let icon of icons) {
-        let filename = path.basename(icon);
-        await fs.copyFile(
-            icon,
-            '../dist/icons/' + filename
-        )
-    }
+
+    fs.removeSync(DIST_FOLDER + ZIP_NAME);
+
+    child_process.execSync(`zip -r ${ZIP_NAME} *`, {
+        cwd: DIST_FOLDER
+    });
 })();

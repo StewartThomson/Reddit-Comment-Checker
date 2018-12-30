@@ -11,13 +11,14 @@ let editorParent = editor.parentElement;
 editorParent.appendChild(createElementFromHTML(`
 <div class="checker">
     <div id="resultContainer">
-        <div class="spinner" style="display:none">
-          <div class="rect1"></div>
-          <div class="rect2"></div>
-          <div class="rect3"></div>
-          <div class="rect4"></div>
-          <div class="rect5"></div>
-        </div>
+        
+    </div>
+    <div class="spinner" style="display:none">
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+      <div class="rect5"></div>
     </div>
 </div>
 `));
@@ -28,6 +29,7 @@ let resultContainer = document.querySelector("#resultContainer");
 document.getElementById("checkBtn").addEventListener("click", function (event) {
     let comment = event.path[2].childNodes[1].childNodes[0].value;
     if (comment) {
+        resultContainer.innerHTML = "";
         spinner.style.display = "block";
         let opts = {
             method: 'POST',
