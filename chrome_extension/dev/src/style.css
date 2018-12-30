@@ -2,10 +2,6 @@
     max-width: 80%;
 }
 
-#resultContainer .display-none {
-    display: none;
-}
-
 /*Accordion from https://www.w3schools.com/howto/howto_js_accordion.asp */
 /* Style the buttons that are used to open and close the accordion panel */
 #resultContainer .accordion {

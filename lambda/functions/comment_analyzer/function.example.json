@@ -5,5 +5,8 @@
   "memory": 1152,
   "timeout": 5,
   "role": "your:aws:arn",
-  "handler": "main"
+  "handler": "main",
+  "hooks": {
+    "build": "dep ensure && GOOS=linux GOARCH=amd64 go build -o main main.go"
+  }
 }

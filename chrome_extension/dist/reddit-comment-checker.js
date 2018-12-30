@@ -11,7 +11,7 @@ let editorParent = editor.parentElement;
 editorParent.appendChild(createElementFromHTML(`
 <div class="checker">
     <div id="resultContainer">
-        <div class="spinner display-none">
+        <div class="spinner" style="display:none">
           <div class="rect1"></div>
           <div class="rect2"></div>
           <div class="rect3"></div>
@@ -28,7 +28,7 @@ let resultContainer = document.querySelector("#resultContainer");
 document.getElementById("checkBtn").addEventListener("click", function (event) {
     let comment = event.path[2].childNodes[1].childNodes[0].value;
     if (comment) {
-        spinner.classList.remove("display-none");
+        spinner.style.display = "block";
         let opts = {
             method: 'POST',
             headers: {
@@ -51,7 +51,7 @@ document.getElementById("checkBtn").addEventListener("click", function (event) {
         }).catch(function (err) {
             console.error(err);
         }).finally(function() {
-            spinner.classList.add("display-none");
+            spinner.style.display = "none";
         });
     }
 });
