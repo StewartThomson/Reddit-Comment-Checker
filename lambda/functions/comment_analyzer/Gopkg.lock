@@ -2,104 +2,188 @@
 
 
 [[projects]]
+  digest = "1:5680f8c40e48f07cb77aece3165a866aaf8276305258b3b70db8ec7ad6ddb78d"
   name = "github.com/armon/go-radix"
   packages = ["."]
+  pruneopts = ""
   revision = "1a2de0c21c94309923825da3df33a4381872c795"
   version = "v1.0.0"
 
 [[projects]]
+  digest = "1:305fae4a0e5d55390c5d91b37da205e48f3bf2390f2ac3e7cec171de6d32b31a"
   name = "github.com/aws/aws-lambda-go"
-  packages = ["events","lambda","lambda/messages","lambdacontext"]
+  packages = [
+    "events",
+    "lambda",
+    "lambda/messages",
+    "lambdacontext",
+  ]
+  pruneopts = ""
   revision = "fb8f88d824489a878aee1e0badde7d8e129f8767"
   version = "v1.7.0"
 
 [[projects]]
+  digest = "1:3dd078fda7500c341bc26cfbc6c6a34614f295a2457149fc1045cab767cbcf18"
   name = "github.com/golang/protobuf"
   packages = ["proto"]
+  pruneopts = ""
   revision = "aa810b61a9c79d51363740d207bb46cf8e620ed5"
   version = "v1.2.0"
 
 [[projects]]
   branch = "master"
+  digest = "1:dce3e694686fabe0dfef1a2bead8786853ce6e17e58f284256e7901d31ce471b"
   name = "github.com/gonum/floats"
   packages = ["."]
+  pruneopts = ""
   revision = "7de1f4ea7ab57890bfd427af68c7994cd67975d4"
 
 [[projects]]
   branch = "master"
+  digest = "1:9d67ab37bed82a724b9805b0ab825a57b8e250e69cf92d327072af9ffce4044a"
   name = "github.com/gonum/internal"
   packages = ["asm/f64"]
+  pruneopts = ""
   revision = "f884aa71402950fb2796dbea0d5aa9ef9cfad8ca"
 
 [[projects]]
   branch = "master"
+  digest = "1:db9a4f4df73d6c653615803bfe7a2506f6b3f141530b998f84c495aec2926434"
   name = "github.com/james-bowman/nlp"
-  packages = [".","measures/pairwise"]
+  packages = [
+    ".",
+    "measures/pairwise",
+  ]
+  pruneopts = ""
   revision = "86af1b5eb1930d69c2bcf793d7e2df4f347c4d9b"
 
 [[projects]]
   branch = "master"
+  digest = "1:1c62216bc1ae405422acd077c204b1c28ef29ff9ccac44f46c9c945eba14baf6"
   name = "github.com/james-bowman/sparse"
-  packages = [".","blas"]
+  packages = [
+    ".",
+    "blas",
+  ]
+  pruneopts = ""
   revision = "4a74a94aeaadf5bf28ce102524edaff7ee7f8643"
 
 [[projects]]
+  digest = "1:bcc46a0fbd9e933087bef394871256b5c60269575bb661935874729c65bbbf60"
   name = "github.com/mitchellh/mapstructure"
   packages = ["."]
+  pruneopts = ""
   revision = "3536a929edddb9a5b34bd6861dc4a9647cb459fe"
   version = "v1.1.2"
 
 [[projects]]
+  digest = "1:633b5b39909d9d794f5543baee4971890e1866f5c082cdf4694954c1ff489a18"
   name = "github.com/spaolacci/murmur3"
   packages = ["."]
+  pruneopts = ""
   revision = "9f5d223c60793748f04a9d5b4b4eacddfc1f755d"
   version = "v1.1"
 
 [[projects]]
   branch = "master"
+  digest = "1:993a4f7084706ac938aaddb62ec87a8c4ccaa9dc9d244befae40f1762916ef1a"
   name = "github.com/turnage/graw"
   packages = ["reddit"]
+  pruneopts = ""
   revision = "15877a6c18d60f0ad1336c3d44fb59e95c3e6b40"
 
 [[projects]]
+  digest = "1:d5a60d136f244bb1bd940b3d706142c6d1cca7870787511e0be92da493d47512"
   name = "github.com/turnage/redditproto"
   packages = ["."]
+  pruneopts = ""
   revision = "e5041bea89ff1f806a75e266af69f4fb82f1eff3"
   version = "2.1.0"
 
 [[projects]]
   branch = "master"
+  digest = "1:1228be918f1599aaf5f343e157de50c9d4c9a4abe0013d9771877ed46e1b70b5"
   name = "golang.org/x/exp"
   packages = ["rand"]
+  pruneopts = ""
   revision = "d9c527d6d0b47a696ffac0deae40c20e56c9e1c5"
 
 [[projects]]
   branch = "master"
+  digest = "1:4ab2fc83e3222b69759dfd717e01d0cf38b133aabfacc29a86057021a2f1abd9"
   name = "golang.org/x/net"
-  packages = ["context","context/ctxhttp"]
+  packages = [
+    "context",
+    "context/ctxhttp",
+  ]
+  pruneopts = ""
   revision = "927f97764cc334a6575f4b7a1584a147864d5723"
 
 [[projects]]
   branch = "master"
+  digest = "1:ea010cdb976f9de0c763728a76278f9109fca3299abd0dc3e8f2ccb9ff347268"
   name = "golang.org/x/oauth2"
-  packages = [".","internal"]
+  packages = [
+    ".",
+    "internal",
+  ]
+  pruneopts = ""
   revision = "d668ce993890a79bda886613ee587a69dd5da7a6"
 
 [[projects]]
   branch = "master"
+  digest = "1:7ce3048bc3468e97a7c3b1bc28c80c668da5ab724e7033c01652cefc1bd758aa"
   name = "gonum.org/v1/gonum"
-  packages = ["blas","blas/blas64","blas/gonum","floats","internal/asm/c128","internal/asm/f32","internal/asm/f64","internal/math32","lapack","lapack/gonum","lapack/lapack64","mat","mathext","mathext/internal/amos","mathext/internal/cephes","mathext/internal/gonum","stat","stat/distuv","stat/sampleuv"]
+  packages = [
+    "blas",
+    "blas/blas64",
+    "blas/gonum",
+    "floats",
+    "internal/asm/c128",
+    "internal/asm/f32",
+    "internal/asm/f64",
+    "internal/math32",
+    "lapack",
+    "lapack/gonum",
+    "lapack/lapack64",
+    "mat",
+    "mathext",
+    "mathext/internal/amos",
+    "mathext/internal/cephes",
+    "mathext/internal/gonum",
+    "stat",
+    "stat/distuv",
+    "stat/sampleuv",
+  ]
+  pruneopts = ""
   revision = "4a8f3189056394031e19a5377687db27ef7f10b4"
 
 [[projects]]
+  digest = "1:bc09e719c4e2a15d17163f5272d9a3131c45d77542b7fdc53ff518815bc19ab3"
   name = "google.golang.org/appengine"
-  packages = ["internal","internal/base","internal/datastore","internal/log","internal/remote_api","internal/urlfetch","urlfetch"]
+  packages = [
+    "internal",
+    "internal/base",
+    "internal/datastore",
+    "internal/log",
+    "internal/remote_api",
+    "internal/urlfetch",
+    "urlfetch",
+  ]
+  pruneopts = ""
   revision = "e9657d882bb81064595ca3b56cbe2546bbabf7b1"
   version = "v1.4.0"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "bd160c69a1acdefd932797687402f722b9157692c7f3b10d0ded2497f7fecddf"
+  input-imports = [
+    "github.com/aws/aws-lambda-go/events",
+    "github.com/aws/aws-lambda-go/lambda",
+    "github.com/james-bowman/nlp",
+    "github.com/james-bowman/nlp/measures/pairwise",
+    "github.com/turnage/graw/reddit",
+    "gonum.org/v1/gonum/mat",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
