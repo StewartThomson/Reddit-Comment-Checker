@@ -59,7 +59,7 @@ func HandleRequest(req events.APIGatewayProxyRequest) (events.APIGatewayProxyRes
 		return serverError(err)
 	}
 
-	similarComments, err := GetSimilarComments(reqBody.CommentToPost, post.Replies)
+	similarComments, err := getSimilarComments(reqBody.CommentToPost, post.Replies)
 
 	if err != nil {
 		return serverError(err)
@@ -74,12 +74,12 @@ func HandleRequest(req events.APIGatewayProxyRequest) (events.APIGatewayProxyRes
 		StatusCode: http.StatusOK,
 		Body:       string(js),
 		Headers: map[string]string{
-			"Access-Control-Allow-Origin": "chrome-extension://bgchgbcghfnkmhnemjacpcnomnfkpanm",
+			"Access-Control-Allow-Origin": os.Getenv("CORS_ORIGIN"),
 		},
 	}, nil
 }
 
-func GetSimilarComments(query string, corpus []*reddit.Comment) ([]similarComment, error) {
+func getSimilarComments(query string, corpus []*reddit.Comment) ([]similarComment, error) {
 	stopWords := []string{"a", "about", "above", "above", "across", "after", "afterwards", "again", "against", "all", "almost", "alone", "along", "already", "also", "although", "always", "am", "among", "amongst", "amoungst", "amount", "an", "and", "another", "any", "anyhow", "anyone", "anything", "anyway", "anywhere", "are", "around", "as", "at", "back", "be", "became", "because", "become", "becomes", "becoming", "been", "before", "beforehand", "behind", "being", "below", "beside", "besides", "between", "beyond", "bill", "both", "bottom", "but", "by", "call", "can", "cannot", "cant", "co", "con", "could", "couldnt", "cry", "de", "describe", "detail", "do", "done", "down", "due", "during", "each", "eg", "eight", "either", "eleven", "else", "elsewhere", "empty", "enough", "etc", "even", "ever", "every", "everyone", "everything", "everywhere", "except", "few", "fifteen", "fify", "fill", "find", "fire", "first", "five", "for", "former", "formerly", "forty", "found", "four", "from", "front", "full", "further", "get", "give", "go", "had", "has", "hasnt", "have", "he", "hence", "her", "here", "hereafter", "hereby", "herein", "hereupon", "hers", "herself", "him", "himself", "his", "how", "however", "hundred", "ie", "if", "in", "inc", "indeed", "interest", "into", "is", "it", "its", "itself", "keep", "last", "latter", "latterly", "least", "less", "ltd", "made", "many", "may", "me", "meanwhile", "might", "mill", "mine", "more", "moreover", "most", "mostly", "move", "much", "must", "my", "myself", "name", "namely", "neither", "never", "nevertheless", "next", "nine", "no", "nobody", "none", "noone", "nor", "not", "nothing", "now", "nowhere", "of", "off", "often", "on", "once", "one", "only", "onto", "or", "other", "others", "otherwise", "our", "ours", "ourselves", "out", "over", "own", "part", "per", "perhaps", "please", "put", "rather", "re", "same", "see", "seem", "seemed", "seeming", "seems", "serious", "several", "she", "should", "show", "side", "since", "sincere", "six", "sixty", "so", "some", "somehow", "someone", "something", "sometime", "sometimes", "somewhere", "still", "such", "system", "take", "ten", "than", "that", "the", "their", "them", "themselves", "then", "thence", "there", "thereafter", "thereby", "therefore", "therein", "thereupon", "these", "they", "thickv", "thin", "third", "this", "those", "though", "three", "through", "throughout", "thru", "thus", "to", "together", "too", "top", "toward", "towards", "twelve", "twenty", "two", "un", "under", "until", "up", "upon", "us", "very", "via", "was", "we", "well", "were", "what", "whatever", "when", "whence", "whenever", "where", "whereafter", "whereas", "whereby", "wherein", "whereupon", "wherever", "whether", "which", "while", "whither", "who", "whoever", "whole", "whom", "whose", "why", "will", "with", "within", "without", "would", "yet", "you", "your", "yours", "yourself", "yourselves"}
 
 	vectoriser := nlp.NewCountVectoriser(stopWords...)
@@ -110,7 +110,7 @@ func GetSimilarComments(query string, corpus []*reddit.Comment) ([]similarCommen
 	var wg sync.WaitGroup
 	wg.Add(docs)
 	for i := 0; i < docs; i++ {
-		go GetSimilarity(queryVector, lsi, corpus, i, ch, &wg)
+		go getSimilarity(queryVector, lsi, corpus, i, ch, &wg)
 	}
 	go func() {
 		wg.Wait()
@@ -124,7 +124,7 @@ func GetSimilarComments(query string, corpus []*reddit.Comment) ([]similarCommen
 	return matches, nil
 }
 
-func GetSimilarity(queryVector mat.Matrix, lsi mat.Matrix, corpus []*reddit.Comment, index int, ch chan similarComment, wg *sync.WaitGroup) {
+func getSimilarity(queryVector mat.Matrix, lsi mat.Matrix, corpus []*reddit.Comment, index int, ch chan similarComment, wg *sync.WaitGroup) {
 	defer wg.Done()
 	similarity := pairwise.CosineSimilarity(queryVector.(mat.ColViewer).ColView(0), lsi.(mat.ColViewer).ColView(index))
 	if math.IsNaN(similarity) {
