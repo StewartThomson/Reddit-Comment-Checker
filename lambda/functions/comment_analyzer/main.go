@@ -49,7 +49,7 @@ func HandleRequest(req events.APIGatewayProxyRequest) (events.APIGatewayProxyRes
 		return serverError(err)
 	}
 
-	bot, err := reddit.NewBotFromAgentFile(dir+os.Getenv("AGENTFILE"), 0)
+	bot, err := reddit.NewBotFromAgentFile(dir+"/"+os.Getenv("AGENTFILE"), 0)
 	if err != nil {
 		return serverError(err)
 	}
