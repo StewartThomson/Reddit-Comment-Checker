@@ -82,8 +82,8 @@ func TestHandleRequest(t *testing.T) {
 				t.Errorf("HandleRequest() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !compareResponse(got, tt.want) {
-				t.Errorf("Abs(-1) = %v; want %v", got, tt.want)
+			if compareResponse(got, tt.want) {
+				t.Errorf("Response = %v; want %v", got, tt.want)
 			}
 			var body []similarComment
 			err = json.Unmarshal([]byte(got.Body), &body)
@@ -107,12 +107,5 @@ func TestHandleRequest(t *testing.T) {
 }
 
 func compareResponse(r1, r2 events.APIGatewayProxyResponse) bool {
-	if r1.StatusCode != r2.StatusCode {
-		return false
-	}
-	if !reflect.DeepEqual(r1, r2) {
-		return false
-	}
-
-	return true
+	return r1.StatusCode == r2.StatusCode && reflect.DeepEqual(r1, r2)
 }
