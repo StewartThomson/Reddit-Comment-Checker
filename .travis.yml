@@ -12,7 +12,7 @@ matrix:
       install: true
       before_script:
         - cd lambda/functions/comment_analyzer
-        - go install github.com/golangci/golangci-lint/cmd/golangci-lint
+        - go get github.com/golangci/golangci-lint/cmd/golangci-lint
         - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
         - dep ensure
       script:
