@@ -49,9 +49,18 @@ func HandleRequest(req events.APIGatewayProxyRequest) (events.APIGatewayProxyRes
 		return serverError(err)
 	}
 
-	bot, err := reddit.NewBotFromAgentFile(dir+"/"+os.Getenv("AGENTFILE"), 0)
-	if err != nil {
-		return serverError(err)
+	agentFile := os.Getenv("AGENTFILE")
+	var bot reddit.Lurker
+	if agentFile == "" {
+		bot, err = reddit.NewScript("script:comment.checker.test:v1.0 (by /u/scottishboy614)", 0)
+		if err != nil {
+			return serverError(err)
+		}
+	} else {
+		bot, err = reddit.NewBotFromAgentFile(dir+"/"+os.Getenv("AGENTFILE"), 0)
+		if err != nil {
+			return serverError(err)
+		}
 	}
 
 	post, err := bot.Thread(reqBody.Path)
