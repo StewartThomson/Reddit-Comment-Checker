@@ -1,0 +1,29 @@
+matrix:
+  include:
+    - language: go
+      go:
+        - 1.9
+        - 1.10
+        - 1.11
+        - 1.12
+        - master
+      git:
+        depth: 1
+      install: true
+      before_script:
+        - cd lambda/functions/comment_analyzer
+        - go install github.com/golangci/golangci-lint/cmd/golangci-lint
+        - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+        - dep ensure
+      script:
+        - golangci-lint run
+        - go test -v -race ./...
+
+    - language: node_js
+      node_js:
+        - node
+      before_script:
+        - cd chrome_extension/dev
+        - npm install
+      script:
+        - npm run build
