@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/StewartThomson/Reddit-Comment-Checker.svg?branch=master)](https://travis-ci.org/StewartThomson/Reddit-Comment-Checker)
+
 # Reddit comment checker
 This chrome extension checks the top level of all comments in a reddit post for potentially similar comments. Similar comments are displayed and you can upvote them instead of posting duplicate content!
 
