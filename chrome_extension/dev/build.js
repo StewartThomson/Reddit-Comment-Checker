@@ -16,8 +16,10 @@ const child_process = require("child_process");
 
     let files = glob.sync(SRC_FOLDER + "*.js");
 
+    console.log("Merging files...");
     await concat(files, DIST_FOLDER + 'reddit-comment-checker.js');
 
+    console.log("Copying files...");
     for(let globToGet of FILES_TO_COPY) {
         files = glob.sync(SRC_FOLDER + globToGet);
         for(let file of files) {
@@ -29,8 +31,10 @@ const child_process = require("child_process");
         }
     }
 
+    console.log("Removing old zip...");
     fs.removeSync(DIST_FOLDER + ZIP_NAME);
 
+    console.log("Zipping...");
     child_process.execSync(`zip -r ${ZIP_NAME} *`, {
         cwd: DIST_FOLDER
     });

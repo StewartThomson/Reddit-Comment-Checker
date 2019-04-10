@@ -10,6 +10,7 @@
     "build": "dep ensure && GOOS=linux GOARCH=amd64 go build -o main main.go"
   },
   "environment": {
-    "CORS_ORIGIN": "*"
+    "CORS_ORIGIN": "*",
+    "AGENTFILE": "agentfile.template"
   }
 }

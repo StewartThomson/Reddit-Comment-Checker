@@ -7,6 +7,9 @@ matrix:
         - 1.11
         - 1.12
         - master
+      env:
+        - CORS_ORIGIN="*"
+        - AGENTFILE="agentfile.template"
       git:
         depth: 1
       install: true
