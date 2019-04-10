@@ -3,6 +3,9 @@ package main
 import (
 	"encoding/json"
 	"log"
+	"net/http"
+	"os"
+	"reflect"
 	"sort"
 	"strconv"
 	"testing"
@@ -47,7 +50,7 @@ func TestHandleRequest(t *testing.T) {
 				wantErr bool
 				comment string
 			}{
-				name: file.Name() + " " + string(i),
+				name:    file.Name() + " " + string(i),
 				comment: request.CommentToPost,
 				args: args{
 					req: events.APIGatewayProxyRequest{
@@ -61,6 +64,12 @@ func TestHandleRequest(t *testing.T) {
 						IsBase64Encoded: false,
 					},
 				},
+				want: events.APIGatewayProxyResponse{
+					StatusCode: http.StatusOK,
+					Headers: map[string]string{
+						"Access-Control-Allow-Origin": os.Getenv("CORS_ORIGIN"),
+					},
+				},
 				wantErr: false,
 			}
 			tests = append(tests, test)
@@ -72,6 +81,9 @@ func TestHandleRequest(t *testing.T) {
 			if (err != nil) != tt.wantErr {
 				t.Errorf("HandleRequest() error = %v, wantErr %v", err, tt.wantErr)
 				return
+			}
+			if !compareResponse(got, tt.want) {
+				t.Errorf("Abs(-1) = %v; want %v", got, tt.want)
 			}
 			var body []similarComment
 			err = json.Unmarshal([]byte(got.Body), &body)
@@ -87,9 +99,20 @@ func TestHandleRequest(t *testing.T) {
 					break
 				}
 
-				toLog += strconv.FormatFloat(comment.Ranking * 100, 'f', 2, 64) + "% Similar to '" + comment.Comment.Comment + "'\n"
+				toLog += strconv.FormatFloat(comment.Ranking*100, 'f', 2, 64) + "% Similar to '" + comment.Comment.Comment + "'\n"
 			}
 			t.Log(toLog)
 		})
 	}
+}
+
+func compareResponse(r1, r2 events.APIGatewayProxyResponse) bool {
+	if r1.StatusCode != r2.StatusCode {
+		return false
+	}
+	if !reflect.DeepEqual(r1, r2) {
+		return false
+	}
+
+	return true
 }
